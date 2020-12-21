@@ -1,78 +1,35 @@
-/* Задания на урок:
-
-1) Удалить все рекламные блоки со страницы (правая часть сайта)
-
-2) Изменить жанр фильма, поменять "комедия" на "драма"
-
-3) Изменить задний фон постера с фильмом на изображение "bg.jpg". Оно лежит в папке img.
-Реализовать только при помощи JS
-
-4) Список фильмов на странице сформировать на основании данных из этого JS файла.
-Отсортировать их по алфавиту 
-
-5) Добавить нумерацию выведенных фильмов */
-
-
-const createLiItem = (index, text) => (
-    `
-        <li class="promo__interactive-item">
-            <span>${index}. ${text}</span>
-            <div class="delete" data-delete-id="${index}"></div>
-        </li>
-    `
-);
-
 
 const movieDB = {
     movies: [
-        "Гоша",
-        "Бозо",
+        "Бургер",
+        "Лига Справедливости",
         "Ла-ла лэнд",
         "Одержимость",
         "Скотт Пилигрим против..."                                                                                           
     ]
 };
+const promoAdvImage = document.querySelectorAll(".promo__adv img");
+const promoGenre = document.querySelector(".promo__genre");
+const promoBg = document.querySelector(".promo__bg");
+let movieList = document.querySelector(".promo__interactive-list");
 
-const poster = document.querySelector(".promo__bg");
-const genre = poster.querySelector(".promo__genre");
-const adv = document.querySelectorAll(".promo__adv img");
-const movieList = document.querySelector(".promo__interactive-list");
-const movieInput = document.querySelector("#add_input");
-const addButton = document.querySelector("#buttonOne");
 
-let currentAddInputValue = '';
-
-genre.textContent = 'Драма';
-
-poster.style.background = "url('img/bg.jpg')";
-
-adv.forEach(i => {
-    i.remove();
+promoAdvImage.forEach(element => { // удаляем рекламные блоки
+    element.remove();
 });
 
-movieDB.movies.sort();
+promoGenre.textContent = "Драма"; // меняем жанр фильма
 
-movieList.innerHTML = '';
+promoBg.style.backgroundImage = 'url("img/bg.jpg")'; // меняем задний фон
 
-movieDB.movies.forEach((movie, i) => {
-    movieList.innerHTML += createLiItem(i + 1, movie);
+movieList.innerHTML = ''; // Очищаем список фильмов на странице. (разница innerHTML и textContent  в том, что в innerHTML мы можем вставлять HTML код, а в textContent только текст)
+
+movieDB.movies.sort(); // Сортиуем массив movieDB
+
+movieDB.movies.forEach((film, i) => { // Формируем список фильмов из объекта movieDB. Как вариант можнео вручную создавать каждый элемент через команду create element, добавляем класс, добавляем внутренности на основании массива movieDB, но это не оптимизированный вариант.
+    movieList.innerHTML += `
+        <li class="promo__interactive-item">${i + 1}. ${film}
+            <div class="delete"></div>
+        </li>
+    `;
 });
-
-movieInput.addEventListener('input', (event) => {
-    currentAddInputValue = event.target.value;
-});
-
-addButton.addEventListener('click', (event) => {
-    event.preventDefault();
-
-    if (!currentAddInputValue) return;
-
-    const all = document.querySelectorAll(".promo__interactive-item");
-    const currentIdx = all ? all.length + 1 : 1;
-    movieList.innerHTML += createLiItem(currentIdx, currentAddInputValue);
-    currentAddInputValue = '';
-    movieInput.value = '';
-});
-
-// document.querySelector('button[data-addButton="buttonOne"]')
-//  console.log(currentAddInputValue);
