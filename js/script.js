@@ -14,6 +14,7 @@ const promoBg = document.querySelector(".promo__bg");
 let movieList = document.querySelector(".promo__interactive-list");
 let buttonOne = document.querySelector("#buttonOne");
 let addInput = document.querySelector("#add_input");
+let NimberOfMovies = movieDB.movies.length;
 
 
 promoAdvImage.forEach(element => { // удаляем рекламные блоки
@@ -28,7 +29,7 @@ movieList.innerHTML = ''; // Очищаем список фильмов на с�
 
 movieDB.movies.sort(); // Сортиуем массив movieDB
 
-movieDB.movies.forEach((film, i) => { // Формируем список фильмов из объекта movieDB. Как вариант можнео вручную создавать каждый элемент через команду create element, добавляем класс, добавляем внутренности на основании массива movieDB, но это не оптимизированный вариант.
+movieDB.movies.forEach((film, i) => { 
     movieList.innerHTML += `
         <li class="promo__interactive-item">${i + 1}. ${film}
             <div class="delete"></div>
@@ -39,7 +40,7 @@ movieDB.movies.forEach((film, i) => { // Формируем список фил�
 buttonOne.addEventListener('click', (e) => {
     event.preventDefault();
     movieList.innerHTML += `
-        <li class="promo__interactive-item"> ${addInput.value}
+        <li class="promo__interactive-item"> ${NimberOfMovies + 1}.  ${addInput.value}
             <div class="delete"></div>
         </li>
     `;
@@ -47,5 +48,10 @@ buttonOne.addEventListener('click', (e) => {
     movieDB.movies += `,${addInput.value}`;
     console.log(movieDB.movies);
     addInput.value = '';
+
+    NimberOfMovies += 1;
   
 });
+
+
+
