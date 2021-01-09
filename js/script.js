@@ -14,7 +14,7 @@ const promoBg = document.querySelector(".promo__bg");
 let movieList = document.querySelector(".promo__interactive-list");
 let buttonOne = document.querySelector("#buttonOne");
 let addInput = document.querySelector("#add_input");
-let NimberOfMovies = movieDB.movies.length;
+let NimberOfMovies = movieDB.movies.length; // глобальная переменная для ведения счёта фильмов в списке
 
 
 promoAdvImage.forEach(element => { // удаляем рекламные блоки
@@ -40,18 +40,28 @@ movieDB.movies.forEach((film, i) => {
 buttonOne.addEventListener('click', (e) => {
     event.preventDefault();
     movieList.innerHTML += `
-        <li class="promo__interactive-item"> ${NimberOfMovies + 1}.  ${addInput.value}
+        <li class="promo__interactive-item"> ${NimberOfMovies + 1}.  ${addInput.value.slice(1, 8) + '...'}
             <div class="delete"></div>
         </li>
     `;
 
     movieDB.movies += `,${addInput.value}`;
     console.log(movieDB.movies);
-    addInput.value = '';
+    
 
     NimberOfMovies += 1;
   
+    if (addInput.value.length > 21) {
+
+    }
+
+    console.log(addInput.value.slice(1, 8) + '...');
+
+    addInput.value = '';
 });
 
+// if (addInput.value.length > 21) {
+//     console.log(hi);  
+// }
 
 
