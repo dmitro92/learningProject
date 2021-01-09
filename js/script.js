@@ -12,6 +12,8 @@ const promoAdvImage = document.querySelectorAll(".promo__adv img");
 const promoGenre = document.querySelector(".promo__genre");
 const promoBg = document.querySelector(".promo__bg");
 let movieList = document.querySelector(".promo__interactive-list");
+let buttonOne = document.querySelector("#buttonOne");
+let addInput = document.querySelector("#add_input");
 
 
 promoAdvImage.forEach(element => { // удаляем рекламные блоки
@@ -32,4 +34,18 @@ movieDB.movies.forEach((film, i) => { // Формируем список фил�
             <div class="delete"></div>
         </li>
     `;
+});
+
+buttonOne.addEventListener('click', (e) => {
+    event.preventDefault();
+    movieList.innerHTML += `
+        <li class="promo__interactive-item"> ${addInput.value}
+            <div class="delete"></div>
+        </li>
+    `;
+
+    movieDB.movies += `,${addInput.value}`;
+    console.log(movieDB.movies);
+    addInput.value = '';
+  
 });
