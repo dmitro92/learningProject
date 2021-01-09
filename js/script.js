@@ -16,6 +16,7 @@ let buttonOne = document.querySelector("#buttonOne");
 let addInput = document.querySelector("#add_input");
 let NimberOfMovies = movieDB.movies.length; 
 let deleteButton = document.querySelectorAll(".delete");
+let favoriteCheckbox = document.querySelector(".favorite");
 
 
 promoAdvImage.forEach(element => { 
@@ -55,13 +56,18 @@ buttonOne.addEventListener('click', (e) => {
     NimberOfMovies += 1;
   
     addInput.value = '';
+
+    if (favoriteCheckbox.checked == true) { //Четвёртое задание выполнено
+        console.log('Добавляем любимый фильм');
+    }
 });
 
-movieList.addEventListener('click', (e) => { // Третье задание выполнено
+movieList.addEventListener('click', (e) => { 
     
     if (e.target.className == 'delete') {
         e.target.parentElement.remove();
     }
 });
+
 
 
