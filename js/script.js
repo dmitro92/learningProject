@@ -14,20 +14,20 @@ const promoBg = document.querySelector(".promo__bg");
 let movieList = document.querySelector(".promo__interactive-list");
 let buttonOne = document.querySelector("#buttonOne");
 let addInput = document.querySelector("#add_input");
-let NimberOfMovies = movieDB.movies.length; // глобальная переменная для ведения счёта фильмов в списке
+let NimberOfMovies = movieDB.movies.length; 
 
 
-promoAdvImage.forEach(element => { // удаляем рекламные блоки
+promoAdvImage.forEach(element => { 
     element.remove();
 });
 
-promoGenre.textContent = "Драма"; // меняем жанр фильма
+promoGenre.textContent = "Драма"; 
 
-promoBg.style.backgroundImage = 'url("img/bg.jpg")'; // меняем задний фон
+promoBg.style.backgroundImage = 'url("img/bg.jpg")'; 
 
-movieList.innerHTML = ''; // Очищаем список фильмов на странице. (разница innerHTML и textContent  в том, что в innerHTML мы можем вставлять HTML код, а в textContent только текст)
+movieList.innerHTML = ''; 
 
-movieDB.movies.sort(); // Сортиуем массив movieDB
+movieDB.movies.sort(); 
 
 movieDB.movies.forEach((film, i) => { 
     movieList.innerHTML += `
@@ -40,10 +40,10 @@ movieDB.movies.forEach((film, i) => {
 buttonOne.addEventListener('click', (e) => {
     event.preventDefault();
     movieList.innerHTML += `
-        <li class="promo__interactive-item"> ${NimberOfMovies + 1}.  ${addInput.value.slice(1, 8) + '...'}
+        <li class="promo__interactive-item"> ${NimberOfMovies + 1}.  ${addInput.value.slice(1, 8) + '...'} 
             <div class="delete"></div>
         </li>
-    `;
+    `; // добавил slice в addInput для 2 задания
 
     movieDB.movies += `,${addInput.value}`;
     console.log(movieDB.movies);
@@ -51,17 +51,8 @@ buttonOne.addEventListener('click', (e) => {
 
     NimberOfMovies += 1;
   
-    if (addInput.value.length > 21) {
-
-    }
-
-    console.log(addInput.value.slice(1, 8) + '...');
-
     addInput.value = '';
 });
 
-// if (addInput.value.length > 21) {
-//     console.log(hi);  
-// }
 
 
